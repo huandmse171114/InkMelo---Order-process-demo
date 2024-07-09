@@ -13,11 +13,21 @@ function Car() {
 
         console.log(SERVER_URL)
         const response = await fetch(
-            SERVER_URL + '/car',
-            { method: 'GET', redirect: "follow" }
-        ).then((response) => response.json());
+            "http://localhost:8080/oauth2/authorization/google",
+            // SERVER_URL + '/car',
+            { method: 'GET', redirect: "follow", credentials: 'include' }
+        ).then((response) => response);
+        
 
-        setCars(response)
+        if (response.redirected) {
+            document.location = response.url
+        }
+
+        console.log(response)
+
+        const data = await response.json();
+
+        setCars(data)
     }
 
     function handleClick() {
