@@ -27,6 +27,7 @@ function Car() {
 
         const data = await response.json();
 
+
         setCars(data)
     }
 
